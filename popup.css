@@ -1,0 +1,78 @@
+body {
+    font-family: Inter, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: fit-content; /* Adjust the width percentage as needed */
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 22px); /* Adjusting input width to accommodate padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensuring padding and border are included in width */
+}
+
+.remember-me {
+    margin-bottom: 15px;
+}
+
+.forgot-password {
+    font-size: 14px;
+    text-align: right;
+}
+
+.btn {
+    width: calc(100% - 22px); /* Adjusting button width to accommodate padding */
+    padding: 10px;
+    background-color: #003BB3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box; /* Ensuring padding is included in width */
+}
+
+.btn:hover {
+    background-color: #021452;
+}
+
+.social-login {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.social-login a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #003BB3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.social-login a:hover {
+    background-color: #021452;
+}
