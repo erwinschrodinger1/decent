@@ -1,5 +1,5 @@
 chrome.tabs.onUpdated.addListener((tabId, tab) => {
-  if (tab.url && tab.url.includes("facebook.com/messages/t")) {
+  if (tab.url && tab.url.includes("facebook.com/messages/")) {
     const segments = tab.url.split("/");
     const uniqueId = segments[segments.length - 1];
     console.log("Hello from background.js!");

@@ -9,38 +9,38 @@ window.onload = function () {
   let valueNotToChange;
   let testToChange;
   let removingElement;
-  // chrome.runtime.onMessage.addListener((obj, sender, response) => {
-  //   const { type, uniqueId } = obj;
-  //   if (type === "uniqueId") {
-  //     console.log("Hello from content.js!");
-  //     console.log(uniqueId);
-  //     recordNewMessage(uniqueId);
-  //   }
-  // });
-  // const recordNewMessage = (uniqueId) => {
-  chrome.runtime.onMessage.addListener((obs, sender, response) => {
-    console.log("Target Changed");
-    const encryptExists = document.getElementsByClassName("bookmark-btn")[0];
-    const encrypt = document.inn("img");
-    if (!encryptExists) {
-      console.log("Bookmark button not found!");
-      encrypt.src = "../../../public/assets/logo.png";
-      encrypt.className = "bookmark-btn" + "facebook-button";
-      encrypt.title = "Click to bookmark this conversation";
-      encrypt.style.marginLeft = "8px";
-      encrypt.addEventListener("mouseover", function () {
-        encrypt.style.cursor = "pointer";
-      });
-    }
-    const targetElement = document.querySelector(".x78zum5.x1iyjqo2.x6q2ic0");
-    if (targetElement) {
-      console.log("Target element found!");
-      targetElement.appendChild(encrypt);
-    } else {
-      console.log("Target Not found");
-    }
+  chrome.runtime.onMessage.addListener((obj, sender, response) => {
+    const { type, uniqueId } = obj;
+    // if (type === "uniqueId") {
+    console.log("Hello from content.js!");
+    console.log(uniqueId);
+    recordNewMessage(uniqueId);
+    // }
   });
-
+  const recordNewMessage = (uniqueId) => {
+    chrome.runtime.onMessage.addListener((obs, sender, response) => {
+      console.log("Target Changed");
+      const encryptExists = document.getElementsByClassName("bookmark-btn")[0];
+      const encrypt = document.createElement("img");
+      if (!encryptExists) {
+        console.log("Bookmark button not found!");
+        encrypt.src = "../../../public/assets/logo.png";
+        encrypt.className = "bookmark-btn" + "facebook-button";
+        encrypt.title = "Click to bookmark this conversation";
+        encrypt.style.marginLeft = "8px";
+        encrypt.addEventListener("mouseover", function () {
+          encrypt.style.cursor = "pointer";
+        });
+      }
+      const targetElement = document.querySelector(".x78zum5.x1iyjqo2.x6q2ic0");
+      if (targetElement) {
+        console.log("Target element found!");
+        targetElement.appendChild(encrypt);
+      } else {
+        console.log("Target Not found");
+      }
+    });
+  };
   //       boxToReplace = document.querySelector(
   //         // ".xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f.notranslate"
   //         ".x78zum5.x1iyjqo2.xq8finb.x16n37ib.x1xmf6yo.x1e56ztr.xeuugli.x1n2onr6"
