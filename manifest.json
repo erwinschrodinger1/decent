@@ -9,23 +9,28 @@
   },
   "content_scripts": [
     {
-      "js": ["./src/componets/content/scripts/content.js"],
+      "js": ["./src/components/content/scripts/content.js"],
       "matches": ["https://*.messenger.com/*", "https://*.facebook.com/*"]
     }
   ],
   "permissions": [
+    "tabs",
     "activeTab",
     "contextMenus",
     "storage",
     "scripting",
     "downloads"
   ],
+  "background": {
+    "service_worker": "./src/components/background/scripts/index.js",
+    "type": "module"
+  },
   "icons": {
     "128": "./public/assets/Decent.png"
   },
   "web_accessible_resources": [
     {
-      "resources": ["assets/Decent.png"],
+      "resources": ["./public/assets/Decent.png"],
       "matches": ["https://*.messenger.com/*", "https://*.facebook.com/*"]
     }
   ]
