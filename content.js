@@ -24,6 +24,10 @@ chrome.runtime.onMessage.addListener((request, sender) => {
 });
 
 window.onload = function () {
+  let boxToReplace;
+  let valueNotToChange;
+  let testToChange;
+  let removingElement;
   chrome.runtime.onMessage.addListener((obj, sender, response) => {
     const { type, uniqueId } = obj;
     if (type === "uniqueId") {
@@ -48,43 +52,75 @@ window.onload = function () {
       if (targetElement) {
         console.log("Target element found!");
         targetElement.appendChild(encrypt);
-        encrypt.addEventListener("click", encryptMessage);
+        boxToReplace = document.querySelector(
+          // ".xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f.notranslate"
+          ".x78zum5.x1iyjqo2.xq8finb.x16n37ib.x1xmf6yo.x1e56ztr.xeuugli.x1n2onr6"
+          // ".x78zum5.x13a6bvl"
+        );
+        removingElement = document.querySelector(
+          ".xi81zsa.x6ikm8r.x10wlt62.x47corl.x10l6tqk.x17qophe.xlyipyv.x13vifvy.x87ps6o.xuxw1ft.xh8yej3"
+        );
+        console.log("removingElement", removingElement);
+        testToChange = document.querySelector(
+          ".xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f.notranslate"
+          // ".x78zum5.x1iyjqo2.xq8finb.x16n37ib.x1xmf6yo.x1e56ztr.xeuugli.x1n2onr6"
+        );
+        //
+        var divToRemove = document.querySelector(
+          ".xi81zsa.x6ikm8r.x10wlt62.x47corl.x10l6tqk.x17qophe.xlyipyv.x13vifvy.x87ps6o.xuxw1ft.xh8yej3"
+        );
+        divToRemove.parentNode.removeChild(divToRemove);
+        valueNotToChange = boxToReplace.cloneNode(true);
+        console.log("valueNotToChange", valueNotToChange);
+        console.log("boxToReplace", boxToReplace);
+        console.log("testToChange", testToChange);
+        encrypt.addEventListener("click", function () {
+          encryptMessage(valueNotToChange);
+        });
       } else {
         console.error("Target element not found!");
       }
     }
   };
   // recordNewMessage();
-  const encryptMessage = () => {
+  function encryptMessage(valueNotToChange) {
     console.log("Encrypting message...");
-
+    // console.log(boxToReplace);
+    console.log("valueNotToChange", valueNotToChange);
+    console.log("boxToReplace", boxToReplace);
+    console.log("testToChange", testToChange);
     const message = document.querySelector(
       'span.x3jgonx[data-lexical-text="true"]'
     );
     console.log("Message: ", message.innerText);
     const encryptedMessage = encrypt(message.innerText);
+    message.innerText = encryptedMessage;
     console.log("Encrypted message: ", encryptedMessage);
-    const textbox = document.querySelector(
-      ".xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f.notranslate"
+
+    const parentMessage = document.querySelector(
+      ".x78zum5.x1iyjqo2.xq8finb.x16n37ib.x1xmf6yo.x1e56ztr.xeuugli.x1n2onr6"
     );
-    console.log("textbox", textbox);
-    var spanElements = textbox.querySelectorAll(".x3jgonx");
-    console.log("before", spanElements);
-    console.log("Check", spanElements[0].innerText);
-    spanElements[0].innerText = encryptedMessage;
-    // spanElements.forEach(function (spanElement) {
-    //   console.log("each" + spanElement.innerText);
-    //   spanElement[0].innerText = encryptedMessage;
-    //   console.log(spanElement.innerText);
-    // });
-    console.log("after" + spanElements[0].innerText);
-    console.log("textbox span", spanElements);
-    // const messageParent = document.querySelector(".xat24cr.xdj266r.xdpxx8g");
-    // messageParent.removeChild(message);
-    // message.parentNode.removeChild(message);
-    // message.textContent = encryptedMessage;
+    parentMessage.removeChild(
+      document.querySelector(
+        ".xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f.notranslate"
+      )
+    );
+    console.log("parentMessage", parentMessage);
+    console.log("valueNotToChange", valueNotToChange);
+    const spanElement = valueNotToChange.querySelector("p");
+    const replacingInnerHtml = `<p class="xat24cr xdj266r xdpxx8g" dir="ltr"><span class="x3jgonx" data-lexical-text="true">${encryptedMessage}</span></p>`;
+    spanElement.innerHTML = replacingInnerHtml;
+    console.log("replacingInnerHtml", replacingInnerHtml);
+
+    console.log("spanElement.innerHtml", spanElement.innerHTML);
+    console.log("valueNotToChnage", valueNotToChange);
+
+    parentMessage.replaceWith(valueNotToChange);
+    parentMessage.removeChild(removingElement);
+
+    console.log("parentMessage", parentMessage);
     console.log("here" + message.textContent);
-  };
+  }
 
   const encrypt = (message) => {
     // Simple Caesar Cipher encryption
