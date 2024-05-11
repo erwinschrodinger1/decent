@@ -4,11 +4,17 @@
   "version": "0.0.1",
   "description": "A simple Chrome extension that encrypts the text of the webpage",
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": "decent.png"
+    "default_popup": "./src/components/popup/index.html",
+    "default_icon": "./public/assets/Decent.png"
   },
-  "permissions": ["activeTab", "contextMenus", "storage", "scripting"],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "scripting",
+    "downloads"
+  ],
   "icons": {
-    "128": "decent.png"
+    "128": "./public/assets/Decent.png"
   }
 }
