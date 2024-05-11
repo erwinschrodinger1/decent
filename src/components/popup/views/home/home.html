@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>On</title>
-    <link rel = "stylesheet" href="../home/home.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../home/home.css" />
+  </head>
+  <body>
     <div class="containter">
-        <div class="header">
-            <img src = "../../../../../public/assets/logo-with-text.png">
-        </div>
-        <hr>
-        <a href = "off.html">
-            <div class = "state">
-                <img src = "../../../../../public/assets/on.png" href="off.html" id="switch">
-            </div>
+      <div class="header">
+        <img src="../../../../../public/assets/logo-with-text.png" />
+      </div>
+      <hr />
+      <div id="encryption">
+        <a href="off.html">
+          <div class="state">
+            <img
+              src="../../../../../public/assets/on.png"
+              href="off.html"
+              id="switch"
+            />
+          </div>
         </a>
-        <div class = "buttons">
-            <img src = "../../../../../public/assets/message.png" id="message">
-            <img src = "../../../../../public/assets/configure.png" id="configure">
-            <img src = "../../../../../public/assets/settings.png" id="settings">
-            <img src = "../../../../../public/assets/profile.png" id="profile">
-        </div>
+      </div>
+      <button id="decrypt">Decrypt</button>
+      <div class="buttons">
+        <img src="../../../../../public/assets/message.png" id="message" />
+        <img src="../../../../../public/assets/configure.png" id="configure" />
+        <img src="../../../../../public/assets/settings.png" id="settings" />
+        <img src="../../../../../public/assets/profile.png" id="profile" />
+      </div>
+      <div id="idText"></div>
     </div>
-</body>
+    <script src="../../scripts/popup.js"></script>
+  </body>
 </html>

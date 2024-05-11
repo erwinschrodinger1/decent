@@ -1,129 +1,149 @@
-chrome.runtime.onMessage.addListener((request, sender) => {
-  console.log("request", request);
-  console.log("sender", sender);
+// chrome.runtime.onMessage.addListener((request, sender) => {
+//   console.log("request", request);
+//   console.log("sender", sender);
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM Loaded");
 });
 
 window.onload = function () {
-  console.log("Loaded ");
-  let boxToReplace;
-  let valueNotToChange;
-  let testToChange;
-  let removingElement;
-  chrome.runtime.onMessage.addListener((obj, sender, response) => {
-    const { type, uniqueId } = obj;
-    // if (type === "uniqueId") {
-    console.log("Hello from content.js!");
-    console.log(uniqueId);
-    recordNewMessage(uniqueId);
-    // }
+  let UUID = window.localStorage.getItem("user_auth");
+  const userObj = JSON.parse(UUID);
+  const userId = userObj.id;
+
+  // send this userId to the popup.js
+  chrome.runtime.sendMessage({ userId: userId, actions: "getUserId" });
+  chrome.runtime.sendMessage({ actions: "download" });
+  chrome.runtime.onMessage.addListener((privateKeyBlob) => {
+    console.log("Received private key blob");
+    const url = URL.createObjectURL(privateKeyBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "decent/decent_private_key.pkcs8";
+    link.click();
+    URL.revokeObjectURL(url); // Release the object URL after download
   });
+  console.log("User ID: ", userId);
+  console.log("Loaded ");
+  let isTextEncrypted = false;
+  let originalText = "";
+  let checkIfEncryptButtonExists = false;
+
   const recordNewMessage = (uniqueId) => {
-    chrome.runtime.onMessage.addListener((obs, sender, response) => {
-      console.log("Target Changed");
-      const encryptExists = document.getElementsByClassName("bookmark-btn")[0];
+    console.log("Target Changed");
+    console.log("Unique ID: ", uniqueId);
+    const encryptExists = document.getElementsByClassName("bookmark-btn")[0];
+    if (!encryptExists && !checkIfEncryptButtonExists) {
+      const encryptContainer = document.createElement("div");
+      encryptContainer.className = "encrypt-container";
+      const encryptText = document.createElement("div");
+
+      encryptText.className = "encrypt-text";
+      encryptText.textContent = isTextEncrypted ? "Decrypt" : "Encrypt";
+      encryptText.style.display = "none";
       const encrypt = document.createElement("img");
-      if (!encryptExists) {
-        console.log("Bookmark button not found!");
-        encrypt.src = "../../../public/assets/logo.png";
-        encrypt.className = "bookmark-btn" + "facebook-button";
-        encrypt.title = "Click to bookmark this conversation";
-        encrypt.style.marginLeft = "8px";
-        encrypt.addEventListener("mouseover", function () {
-          encrypt.style.cursor = "pointer";
-        });
-      }
-      const targetElement = document.querySelector(".x78zum5.x1iyjqo2.x6q2ic0");
+      console.log("Bookmark button not found!");
+      encrypt.src = chrome.runtime.getURL("public/assets/Decent.png");
+      // decrease size of the image
+      encrypt.style.width = "46px";
+      encrypt.style.height = "46px";
+      encrypt.className = "bookmark-btn" + "telegram-button";
+      // encrypt.title = "Click to bookmark this conversation";
+      encrypt.style.marginRight = "8px";
+      encrypt.addEventListener("mouseover", function () {
+        encrypt.style.cursor = "pointer";
+        encryptText.textContent = isTextEncrypted ? "Decrypt" : "Encrypt";
+        encryptText.style.display = "block"; // Show the text on mouseover
+      });
+      encrypt.addEventListener("mouseout", function () {
+        encryptText.style.display = "none"; // Hide the text on mouseout
+      });
+      encryptContainer.appendChild(encryptText);
+      encryptContainer.appendChild(encrypt);
+      const targetElement = document.querySelector(".rows-wrapper-wrapper");
       if (targetElement) {
         console.log("Target element found!");
-        targetElement.appendChild(encrypt);
+        targetElement.style.marginRight = "58px"; // Move this line inside the check
+        targetElement.prepend(encryptContainer);
+        checkIfEncryptButtonExists = true;
       } else {
         console.log("Target Not found");
       }
-    });
+      encrypt.addEventListener("click", () => {
+        if (isTextEncrypted) {
+          replaceOriginalMessage();
+          encryptText.textContent = "Encrypt";
+        } else {
+          encryptMessage();
+          encryptText.textContent = "Decrypt";
+        }
+      });
+      // if (isTextEncrypted) {
+      //   encrypt.addEventListener("click", () => replaceOriginalMessage());
+      // } else {
+      //   encrypt.addEventListener("click", () => encryptMessage());
+      // }
+    }
   };
-  //       boxToReplace = document.querySelector(
-  //         // ".xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f.notranslate"
-  //         ".x78zum5.x1iyjqo2.xq8finb.x16n37ib.x1xmf6yo.x1e56ztr.xeuugli.x1n2onr6"
-  //         // ".x78zum5.x13a6bvl"
-  //       );
-  //       removingElement = document.querySelector(
-  //         ".xi81zsa.x6ikm8r.x10wlt62.x47corl.x10l6tqk.x17qophe.xlyipyv.x13vifvy.x87ps6o.xuxw1ft.xh8yej3"
-  //       );
-  //       console.log("removingElement", removingElement);
-  //       testToChange = document.querySelector(
-  //         ".xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f.notranslate"
-  //         // ".x78zum5.x1iyjqo2.xq8finb.x16n37ib.x1xmf6yo.x1e56ztr.xeuugli.x1n2onr6"
-  //       );
-  //       //
-  //       var divToRemove = document.querySelector(
-  //         ".xi81zsa.x6ikm8r.x10wlt62.x47corl.x10l6tqk.x17qophe.xlyipyv.x13vifvy.x87ps6o.xuxw1ft.xh8yej3"
-  //       );
-  //       divToRemove.parentNode.removeChild(divToRemove);
-  //       valueNotToChange = boxToReplace.cloneNode(true);
-  //       console.log("valueNotToChange", valueNotToChange);
-  //       console.log("boxToReplace", boxToReplace);
-  //       console.log("testToChange", testToChange);
-  //       encrypt.addEventListener("click", function () {
-  //         encryptMessage(valueNotToChange);
-  //       });
-  //     } else {
-  //       console.error("Target element not found!");
-  //     }
-  //   }
-  // };
-  // recordNewMessage();
-  // function encryptMessage(valueNotToChange) {
-  //   console.log("Encrypting message...");
-  //   // console.log(boxToReplace);
-  //   console.log("valueNotToChange", valueNotToChange);
-  //   console.log("boxToReplace", boxToReplace);
-  //   console.log("testToChange", testToChange);
-  //   const message = document.querySelector(
-  //     'span.x3jgonx[data-lexical-text="true"]'
-  //   );
-  //   console.log("Message: ", message.innerText);
-  //   const encryptedMessage = encrypt(message.innerText);
-  //   message.innerText = encryptedMessage;
-  //   console.log("Encrypted message: ", encryptedMessage);
 
-  //   const parentMessage = document.querySelector(
-  //     ".x78zum5.x1iyjqo2.xq8finb.x16n37ib.x1xmf6yo.x1e56ztr.xeuugli.x1n2onr6"
-  //   );
-  //   parentMessage.removeChild(
-  //     document.querySelector(
-  //       ".xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f.notranslate"
-  //     )
-  //   );
-  //   console.log("parentMessage", parentMessage);
-  //   console.log("valueNotToChange", valueNotToChange);
-  //   const spanElement = valueNotToChange.querySelector("p");
-  //   const replacingInnerHtml = `<p class="xat24cr xdj266r xdpxx8g" dir="ltr"><span class="x3jgonx" data-lexical-text="true">${encryptedMessage}</span></p>`;
-  //   spanElement.innerHTML = replacingInnerHtml;
-  //   console.log("replacingInnerHtml", replacingInnerHtml);
+  // recordNewMessage("First Load");
 
-  //   console.log("spanElement.innerHtml", spanElement.innerHTML);
-  //   console.log("valueNotToChnage", valueNotToChange);
+  chrome.runtime.onMessage.addListener((obj, sender, response) => {
+    console.log("OBject is", obj);
+    const { type, uniqueId } = obj;
 
-  //   parentMessage.replaceWith(valueNotToChange);
-  //   parentMessage.removeChild(removingElement);
+    if (type === "uniqueId") {
+      console.log("Hello from content.js!");
+      console.log(uniqueId);
+      recordNewMessage(uniqueId);
+    }
+  });
+  // var userAuthString = localStorage.user_auth;
 
-  //   console.log("parentMessage", parentMessage);
-  //   console.log("here" + message.textContent);
-  // }
+  // // Parse the JSON string into an object
+  // var userAuthObject = JSON.parse(userAuthString);
 
-  // const encrypt = (message) => {
-  //   // Simple Caesar Cipher encryption
-  //   const shift = 3;
-  //   let encryptedMessage = "";
-  //   for (let i = 0; i < message.length; i++) {
-  //     let charCode = message.charCodeAt(i);
-  //     if (charCode >= 65 && charCode <= 90) {
-  //       charCode = ((charCode - 65 + shift) % 26) + 65;
-  //     } else if (charCode >= 97 && charCode <= 122) {
-  //       charCode = ((charCode - 97 + shift) % 26) + 97;
-  //     }
-  //     encryptedMessage += String.fromCharCode(charCode);
-  //   }
-  //   return encryptedMessage;
-  // };
+  // // Access the id property from the object
+  // var userId = userAuthObject.id;
+
+  // // Now userId contains the value of the id property
+  // console.log(userId);
+
+  function encryptMessage(uniqueId) {
+    console.log("Encrypting message...");
+    const message = document.querySelector(
+      ".input-message-input.scrollable.scrollable-y.no-scrollbar"
+    );
+    console.log("Message: ", message.innerText);
+    originalText = message.innerText;
+    const encryptedMessage = encrypt(message.innerText);
+    // chrome.downloads.search({});
+    message.innerText = encryptedMessage;
+    isTextEncrypted = true;
+  }
+
+  function replaceOriginalMessage() {
+    console.log("Replacing original message...");
+    const message = document.querySelector(
+      ".input-message-input.scrollable.scrollable-y.no-scrollbar"
+    );
+    message.innerText = originalText;
+    isTextEncrypted = false;
+  }
+
+  const encrypt = (message) => {
+    chrome.downloads.search({}, (result) => {
+      console.log(result);
+      const private_keys = result.filter((val) =>
+        val.filename.includes("decent_private_key.pkcs8")
+      );
+      if (private_keys.length > 0) {
+        console.log(private_keys[0]);
+      } else {
+        console.log("Key not available");
+      }
+    });
+    return "sometin";
+  };
 };

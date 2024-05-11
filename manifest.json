@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "This is the project for the Deerhack hackathon",
   "manifest_version": 3,
+
   "action": {
-    "default_popup": "./src/components/popup/index.html",
+    "default_popup": "./src/components/popup/views/home/home.html",
     "default_icon": "./public/assets/Decent.png"
   },
   "content_scripts": [
     {
       "js": ["./src/components/content/scripts/content.js"],
-      "matches": ["https://*.messenger.com/*", "https://*.facebook.com/*"]
+      "matches": ["https://*.web.telegram.org/*"]
     }
   ],
   "permissions": [
@@ -30,8 +31,9 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["./public/assets/Decent.png"],
-      "matches": ["https://*.messenger.com/*", "https://*.facebook.com/*"]
+      "resources": ["public/assets/Decent.png"],
+      "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "host_permissions": ["http://*/","https://*/"]
 }
