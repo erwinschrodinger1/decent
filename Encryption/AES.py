@@ -7,8 +7,7 @@ import os
 import RSA
 import randomPrimeNumber
 
-"key pair generation for encrypting AES."
-public,private=RSA.generate_keypair(randomPrimeNumber.primenumber1,randomPrimeNumber.primenumber2)
+
 
 def generate_random_key(key_size=32):
   """Generates a random key of specified size (default 32 bytes for AES-256)"""
@@ -59,6 +58,8 @@ def decrypt(key, ciphertext):
 
 
 if __name__ == "__main__":
+  "key pair generation for encrypting AES."
+  public,private=RSA.generate_keypair(randomPrimeNumber.primenumber1,randomPrimeNumber.primenumber2)
   keyinArray=RSA.decrypt(private,generate_random_key()) # decrypting AES key
   key = bytes(ord(char) for char in keyinArray) # converting to byte-like datatype
   plaintext = "This is a Secret Message".encode()
