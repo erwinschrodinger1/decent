@@ -1,5 +1,7 @@
 # Decent - Building Decentralized Personal Data
 
+![cover photo of Decent App](./public/assets/cover.png)
+
 ## Introduction
 Decent is a browser extension aimed at revolutionizing the way we communicate online. In an era dominated by tech giants and growing concerns about data privacy, Decent offers a solution that empowers users with control over their encryption keys, ensuring enhanced privacy and security for their messages.
 
