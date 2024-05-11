@@ -1,4 +1,7 @@
 {
+  "name": "Deerhack",
+  "version": "1.0.0",
+  "description": "This is the project for the Deerhack hackathon",
   "manifest_version": 3,
   "name": "Decent",
   "version": "0.0.1",
