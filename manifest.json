@@ -9,7 +9,7 @@
   },
   "content_scripts": [
     {
-      "js": ["./src/componets/content/scripts/content.js"],
+      "js": ["./src/components/content/scripts/content.js"],
       "matches": ["https://*.messenger.com/*", "https://*.facebook.com/*"]
     }
   ],

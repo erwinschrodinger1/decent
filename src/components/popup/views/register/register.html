@@ -1,67 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD:popup.html
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./popup.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div>
-        <div class="title">Activate to secure your Facebook messaging.</div>
-        <br />
-        <button id="hellobutton">Click here</button>
-      </div>
-=======
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decent</title>
 </head>
-<link rel="stylesheet" href="regsiter.css">
+<link rel="stylesheet" href="./regsiter.css">
 <body>
     <div class="container">
-        <h2>Sign In</h2>
+        <div class="header">
+            <img src="icons/logo-with-text.png" class="logo">
+        </div>
+        <hr>
+        <h2 class="SceneHead">Sign In</h2>
         <form>
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
             </div>
-            <div class="form-group remember-me">
-                <input type="checkbox" id="remember" name="remember">
-                <label for="remember">Remember Me</label>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
             </div>
-            <div class="form-group forgot-password">
-                <a href="#">Forgot Password?</a>
+            <div class="checker">
+                <div class="form-group-remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember Me</label>
+                </div>
+                <div class="form-group forgot-password">
+                    <a href="../home/home.html">Forgot Password?</a>
+                </div>
             </div>
-            <button type="submit" class="btn">Sign In</button>
+            <button type="submit" class="btn" id="navigateToOnPage">Sign In</button>
         </form>
-        <div class="or-text">or</div>   
-        <a href="../index.html" class="social-login">Login with Solana</a>
->>>>>>> a104c0615494c8ec0ed0e8299b219c438a0f5bad:src/components/popup/views/register/register.html
+        <div class="or-text">or</div>
+        <div class="social-login">
+            <a href="../home/home.html">Login with Ethereum</a>
+        </div>
     </div>
-    <script src="popup.js"></script>
-  </body>
+</body>
 </html>
-
-<!-- <div
-  class="x78zum5 x1iyjqo2 xq8finb x16n37ib x1xmf6yo x1e56ztr xeuugli x1n2onr6"
->
-  <div
-    aria-describedby=":rab:"
-    aria-label="Message"
-    class="xzsf02u x1a2a7pz x1n2onr6 x14wi4xw x1iyjqo2 x1gh3ibb xisnujt xeuugli x1odjw0f notranslate"
-    contenteditable="true"
-    role="textbox"
-    spellcheck="true"
-    tabindex="0"
-    style="user-select: text; white-space: pre-wrap; word-break: break-word"
-    data-lexical-editor="true"
-  >
-    <p class="xat24cr xdj266r xdpxx8g" dir="ltr">
-      <span class="x3jgonx" data-lexical-text="true">asdf</span>
-    </p>
-  </div>
-</div> -->

@@ -1,0 +1,87 @@
+body {
+    font-family: Inter, sans-serif;
+    margin: none;
+    padding: none;
+    background-color: white;
+    max-width: 365px;
+    min-width: 365px;
+    align-items: center;
+}
+
+.container {
+    width: fit-content; /* Adjust the width percentage as needed */
+    max-width: 300px;
+    min-width: 300px;
+    margin: 20px auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #fff;
+    padding: 20px;
+    padding-right: 25px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.header{
+    text-align: center;
+}
+
+.header img{
+    align-self: center;
+    max-width: 50%;
+    max-height: auto;
+    display: inline-block;
+}
+
+hr{
+    color: #003BB3;
+}
+
+.state img{
+    max-width: 100%;
+    max-height: auto;
+}
+
+.state:hover{
+    transition-duration: 2s;
+    opacity: 50%;
+}
+
+.buttons {
+    display: flex; /* Use flexbox to align items in a row */
+    justify-content: space-between; /* Distribute space between items evenly */
+    width: 100%; /* Occupy the full width of the container */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    color: #003BB3;
+    background-color: #fff;
+}
+
+.buttons img{
+    max-width: 25%;
+    max-height: auto;
+    border-radius: 16px;
+}
+
+#profile:hover{
+    color: #fff;
+    background-color: #003BB3;
+}
+
+#message:hover{
+    color: #fff;
+    background-color: #003BB3;
+}
+
+#configure:hover{
+    color: #fff;
+    background-color: #003BB3;
+}
+
+#settings:hover{
+    color: #fff;
+    background-color: #003BB3;
+}
