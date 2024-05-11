@@ -1,23 +1,3 @@
-// window.onload = function () {
-//   var button = document.createElement("button");
-//   button.innerHTML = "Click Me";
-//   const isClicked = document.getElementById("#hellobutton");
-//   if (isClicked) {
-//     alert("Button clicked");
-//   } else {
-//     console.log("Button not clicked");
-//   }
-//   // Add an event listener to the button
-//   button.addEventListener("click", function () {
-//     // Your click event logic goes here
-//     console.log("Button clicked!");
-//   });
-
-//   // Select the target element and prepend the button to it
-//   var targetElement = document.querySelector(".x78zum5.x1iyjqo2.x6q2ic0");
-//   // targetElement.prepend(button);
-// };
-
 chrome.runtime.onMessage.addListener((request, sender) => {
   console.log("request", request);
   console.log("sender", sender);

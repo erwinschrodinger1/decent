@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "This is the project for the Deerhack hackathon",
   "manifest_version": 3,
-  "name": "Decent",
-  "version": "0.0.1",
-  "description": "A simple Chrome extension that encrypts the text of the webpage",
   "action": {
     "default_popup": "./src/components/popup/index.html",
     "default_icon": "./public/assets/Decent.png"
   },
+  "content_scripts": [
+    {
+      "js": ["./src/componets/content/scripts/content.js"],
+      "matches": ["https://*.messenger.com/*", "https://*.facebook.com/*"]
+    }
+  ],
   "permissions": [
     "activeTab",
     "contextMenus",
@@ -19,5 +22,11 @@
   ],
   "icons": {
     "128": "./public/assets/Decent.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/Decent.png"],
+      "matches": ["https://*.messenger.com/*", "https://*.facebook.com/*"]
+    }
+  ]
 }
